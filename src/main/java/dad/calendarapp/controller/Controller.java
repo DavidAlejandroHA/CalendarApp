@@ -12,7 +12,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import dad.calendarapp.CalendarApp;
-import dad.calendarapp.CalendarItem;
+import dad.calendarapp.controller.model.Estilo;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
@@ -44,14 +44,15 @@ public class Controller implements Initializable {
 	private IntegerProperty desplazamiento = new SimpleIntegerProperty(0);
 
 	private ObjectProperty<Locale> idioma = new SimpleObjectProperty<>(new Locale(Locale.getDefault().getLanguage()));
-	// en vez de poner Locale.getDefault() es necesario ponerlo así, si no me
-	// seleccionaría un idioma con una variante aplicada (al ser un objeto diferente
-	// no aparecería seleccionado en la lista)
+	// en vez de poner Locale.getDefault() es necesario ponerlo asÃ­, si no me
+	// seleccionarÃ¡ un idioma con una variante aplicada (al ser un objeto diferente
+	// no aparecerÃ¡ seleccionado en la lista)
 
 	private ObjectProperty<TextStyle> estilo = new SimpleObjectProperty<>(TextStyle.SHORT);
+	private ObjectProperty<Estilo> apariencia = new SimpleObjectProperty<>(Estilo.LIGHT);
 
 	// view
-	
+
 	@FXML
 	private CalendarItem eneroCalendar;
 
@@ -95,6 +96,9 @@ public class Controller implements Initializable {
 	private ComboBox<TextStyle> estiloComboBox;
 
 	@FXML
+	private ComboBox<Estilo> aparienciaComboBox;
+
+	@FXML
 	private Label yearLabel;
 
 	@FXML
@@ -130,7 +134,9 @@ public class Controller implements Initializable {
 				if (event.getCode() == KeyCode.ENTER) {
 					boolean limiteExecido = false;
 					try {
-						int num = Integer.parseInt(desplazamientoSpinner.getEditor().textProperty().get());
+						// String numString = desplazamientoSpinner.getEditor().textProperty().get();
+						String stringNum = desplazamientoSpinner.getEditor().textProperty().get();
+						int num = stringNum == null ? 0 : Integer.parseInt(stringNum);
 						if (num < -9999 || num > 9999) {
 							limiteExecido = true;
 							throw new NumberFormatException();
@@ -144,8 +150,8 @@ public class Controller implements Initializable {
 
 						Alert alerta = new Alert(AlertType.ERROR);
 						alerta.setTitle("Error");
-						alerta.setHeaderText((limiteExecido) ? "Solo se pueden insertar números entre -9999 y 9999."
-								: "Solo se pueden insertar números enteros en el área.");
+						alerta.setHeaderText((limiteExecido) ? "Solo se pueden insertar nÃºmeros entre -9999 y 9999."
+								: "Solo se pueden insertar nÃºmeros enteros en el Ã¡rea.");
 						alerta.initOwner(CalendarApp.primaryStage);
 						alerta.showAndWait();
 					}
@@ -183,7 +189,10 @@ public class Controller implements Initializable {
 		estiloComboBox.getItems().setAll(TextStyle.values());
 		estiloComboBox.getSelectionModel().select(estilo.get());
 
-		// ---- añadir StringConverter al combobox de idiomas para modificar el texto de
+		aparienciaComboBox.getItems().setAll(Estilo.values());
+		aparienciaComboBox.getSelectionModel().select(apariencia.get());
+
+		// ---- aÃ±adir StringConverter al combobox de idiomas para modificar el texto de
 		// ---- cada objeto del combo seleccionado (pasar las iniciales del idioma a un
 		// ---- locale y luego obtener el nombre completo del idioma)
 		idiomaComboBox.setConverter(new StringConverter<Locale>() {
@@ -200,7 +209,7 @@ public class Controller implements Initializable {
 		});
 
 		// bindings
-		// ---- añadir listener para bindear el valor Integer del spinner a
+		// ---- aÃ±adir listener para bindear el valor Integer del spinner a
 		// ---- desplazamiento property cada vez que el valor cambie
 		desplazamientoSpinner.getValueFactory().valueProperty().addListener(this::valueComboChanged);
 
@@ -226,9 +235,13 @@ public class Controller implements Initializable {
 
 		// ---- actualizar el estilo del mes y de los dias de la semana
 		for (int i = 0; i < calendarios.length; i++) {
-			calendarios[i].textStyleProperty().bind(Bindings.createObjectBinding(() -> {
-				return estilo.getValue();
-			}, estilo));
+			calendarios[i].textStyleProperty().bind(estilo);
+
+			// ---- y bindear el estilo css de cada calendario al del controller
+			calendarios[i].aparienciaProperty().bind(Bindings.createObjectBinding(() -> {
+				return apariencia.getValue();
+			}, apariencia)); // en realidad no cambiarÃ¡ nada porque el cambio de
+							// estilo se gestiona desde el controller
 		}
 
 		// ---- bindear el idioma seleccionado a la idioma property
@@ -236,10 +249,26 @@ public class Controller implements Initializable {
 			return idiomaComboBox.getSelectionModel().selectedItemProperty().get();
 		}, idiomaComboBox.valueProperty()));
 
+		// ---- bindear el estilo css seleccionado a cssproperty
+
+		apariencia.set(Estilo.LIGHT);
+		apariencia.bind(Bindings.createObjectBinding(() -> {
+			// view.getStylesheets().setAll(getClass().getResource("/css/" +
+			// apariencia.get().getEstilo()).toExternalForm());
+			return aparienciaComboBox.getSelectionModel().selectedItemProperty().get();
+		}, aparienciaComboBox.valueProperty())); ////////
+
 		// ---- bindear el estilo seleccionado al estilo property
 		estilo.bind(Bindings.createObjectBinding(() -> {
 			return estiloComboBox.getSelectionModel().selectedItemProperty().get();
 		}, estiloComboBox.valueProperty()));
+
+		// No se puede aÃ±adir esto dentro del binding, tiene que ser mediante un
+		// listener
+		apariencia.addListener((o, ov, nv) -> {
+			view.getStylesheets()
+					.setAll(getClass().getResource("/css/" + apariencia.get().getEstilo()).toExternalForm());
+		});
 	}
 
 	public Controller() {
@@ -253,7 +282,7 @@ public class Controller implements Initializable {
 	}
 
 	// el binding a el .getValueFactory().valueProperty() del combobox no iba, tuve
-	// que añadir un listener que gestionase los bindings
+	// que aÃ±adir un listener que gestionase los bindings
 	private void valueComboChanged(ObservableValue<? extends Integer> o, Integer ov, Integer nv) {
 		if (ov != null) {
 			desplazamiento.asObject().unbindBidirectional(desplazamientoSpinner.getValueFactory().valueProperty());

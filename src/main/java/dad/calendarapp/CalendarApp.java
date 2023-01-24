@@ -9,20 +9,20 @@ import javafx.stage.Stage;
 public class CalendarApp extends Application {
 
 	public static Stage primaryStage;
-	//public Scene escena;
+	public Scene escena;
 	
 	private Controller controller = new Controller();
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-
 		CalendarApp.primaryStage = primaryStage;
 		primaryStage.setTitle("CalendarApp");
-		primaryStage.setScene(new Scene(controller.getView()));
+		escena = new Scene(controller.getView());
+		primaryStage.setScene(escena);
 		primaryStage.getIcons().add(new Image(CalendarApp.class.getResourceAsStream("/images/calendar-16x16.png")));
 		primaryStage.show();
 		
-		// añadir un eventHandler para aumentar de año al presionar una flecha
+		// aÃ±adir un eventHandler para aumentar de aÃ±o al presionar una flecha
 		/*escena.addEventHandler(KeyEvent.KEY_PRESSED, (e) -> {
 			switch (e.getCode()){
 	    	case RIGHT:

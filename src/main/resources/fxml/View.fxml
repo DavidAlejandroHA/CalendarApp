@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import dad.calendarapp.CalendarItem?>
+<?import dad.calendarapp.controller.CalendarItem?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane fx:id="view" hgap="30.0" vgap="30.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane fx:id="view" hgap="30.0" stylesheets="@../css/lightstyle.css" vgap="10.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <rowConstraints>
       <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="ALWAYS" />
       <RowConstraints minHeight="10.0" vgrow="ALWAYS" />
@@ -32,7 +32,7 @@
          <children>
             <Button fx:id="yearMenosBoton" mnemonicParsing="false" onAction="#onMenosYearAction" text="&lt;" />
             <HBox HBox.hgrow="ALWAYS" />
-            <Label fx:id="yearLabel" text="Label">
+            <Label fx:id="yearLabel" styleClass="year" text="Label">
                <font>
                   <Font name="System Bold" size="32.0" />
                </font></Label>
@@ -59,25 +59,31 @@
       <CalendarItem fx:id="septiembreCalendar" month="SEPTEMBER" GridPane.rowIndex="4" />
       <CalendarItem fx:id="octubreCalendar" month="OCTOBER" GridPane.columnIndex="1" GridPane.rowIndex="4" />
       <CalendarItem fx:id="noviembreCalendar" month="NOVEMBER" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-      <CalendarItem fx:id="diciembreCalendar" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+      <CalendarItem fx:id="diciembreCalendar" month="DECEMBER" GridPane.columnIndex="3" GridPane.rowIndex="4" />
       <VBox alignment="CENTER_RIGHT" spacing="5.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
          <children>
             <HBox alignment="CENTER_RIGHT" spacing="5.0">
                <children>
                   <Label text="Idioma:" />
-                  <ComboBox fx:id="idiomaComboBox" prefWidth="200.0" />
+                  <ComboBox fx:id="idiomaComboBox" prefWidth="200.0" styleClass="combobox" />
                </children>
             </HBox>
             <HBox alignment="CENTER_RIGHT" spacing="5.0">
                <children>
                   <Label text="Estilo:" />
-                  <ComboBox fx:id="estiloComboBox" prefWidth="200.0" />
+                  <ComboBox fx:id="estiloComboBox" prefWidth="200.0" styleClass="combobox" />
                </children>
             </HBox>
             <HBox alignment="CENTER_RIGHT" spacing="5.0">
                <children>
                   <Label text="Desplazamiento:" />
-                  <Spinner fx:id="desplazamientoSpinner" editable="true" prefWidth="200.0" />
+                  <Spinner fx:id="desplazamientoSpinner" editable="true" prefWidth="200.0" styleClass="combobox" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" spacing="5.0">
+               <children>
+                  <Label text="Apariencia:" />
+                  <ComboBox fx:id="aparienciaComboBox" prefWidth="200.0" styleClass="combobox" />
                </children>
             </HBox>
          </children>

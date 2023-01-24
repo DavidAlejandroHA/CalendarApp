@@ -1,0 +1,46 @@
+.root {
+	-fx-font-family: 'Courier New';
+	-fx-background-color: #2e2e2e;
+	-fx-font-size: 12px;
+	/*-fx-text-color: #8B008B;*/
+	-fx-base: rgba(60, 63, 65, 255);
+}
+
+.year {
+	-fx-font-family: arial;
+	-fx-text-fill: white; 
+	-fx-effect: dropshadow( gaussian , rgba(255,255,255,1.6) , 8, 0.0 , 0 , 0 );
+	-fx-font-size: 26px;
+	-fx-font-weight: bolder;
+}
+
+.month {
+	-fx-font-size: 14px;
+	-fx-font-weight: bold;
+	/*-fx-text-fill: white;*/
+}
+
+.weekday {
+	-fx-font-weight: bolder;
+}
+
+.today{
+	-fx-background-color: linear-gradient(to bottom right, black 0%, orange 100%);
+	-fx-border-radius: 8px;
+	-fx-border-insets: -2 -4 -2 -4;
+	-fx-background-radius: 8px;
+	-fx-background-insets: -2 -4 -2 -4;
+	-fx-border-color: white;
+	-fx-border-style: dashed;
+	-fx-font-weight: bolder;
+}
+
+.day {
+	-fx-font-style: italic;
+}
+
+.sunday {
+	-fx-text-fill: red;
+}
+
+
