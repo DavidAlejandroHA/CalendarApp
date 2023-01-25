@@ -72,10 +72,10 @@ public class CalendarItem extends GridPane implements Initializable {
 
 	private List<Label> listaDiasLabels;
 
-	//private List<Label> diaSemanaLabelLista ;
+	private List<Label> diaSemanaLabelLista;
 
 	public void initialize(URL location, ResourceBundle resources) {
-		
+
 		// set values
 
 		// listaDiasLabels = new Label[] { diaLabel1, diaLabel2 ...42};
@@ -83,9 +83,8 @@ public class CalendarItem extends GridPane implements Initializable {
 		listaDiasLabels = view.getChildren().stream().filter(node -> node instanceof Label).map(node -> (Label) node)
 				.filter(label -> "diaLabel".equals(label.getId())).collect(Collectors.toList());
 
-		
-		//view.getStylesheets().add(getClass().getResource("lightstyle.css").toExternalForm());
-		
+		// view.getStylesheets().add(getClass().getResource("lightstyle.css").toExternalForm());
+
 		monthproperty.set(LocalDate.now().getMonthValue());
 		year.set(LocalDate.now().getYear());
 		month.set(LocalDate.now().getMonth());
@@ -95,15 +94,14 @@ public class CalendarItem extends GridPane implements Initializable {
 
 		StringProperty[] stringPropsArray = { lunesTitulo, martesTitulo, miercolesTitulo, juevesTitulo, viernesTitulo,
 				sabadoTitulo, domingoTitulo };
-		
-		
-		 /*diaSemanaLabelLista = view.getChildren().stream().filter(node -> node
-		 instanceof Label).map(node -> (Label) node) .filter(label ->
-		 "weekday".equals(label.getId())).collect(Collectors.toList()); // 7 en total
-		 System.out.println(diaSemanaLabelLista);*/
-		
-		Label[] semanaLabelListaArray = { lunesLabel, martesLabel, miercolesLabel, juevesLabel, viernesLabel,
-				sabadoLabel, domingoLabel };
+
+		diaSemanaLabelLista = view.getChildren().stream().filter(node -> node instanceof Label)
+				.map(node -> (Label) node).filter(label -> "diaSemanaLabel".equals(label.getId()))
+				.collect(Collectors.toList()); // 7 en total
+		// diaSemanaLabelLista.get(0).getStyleClass().get(1)
+
+//		Label[] semanaLabelListaArray = { lunesLabel, martesLabel, miercolesLabel, juevesLabel, viernesLabel,
+//				sabadoLabel, domingoLabel };
 
 		// bindings
 		lunesLabel.textProperty().bind(lunesTitulo);
@@ -129,7 +127,7 @@ public class CalendarItem extends GridPane implements Initializable {
 				String diaSemana = DayOfWeek.values()[numDiaCorrespondiente].getDisplayName(estilo.get(), idioma.get());
 				diaSemana = (diaSemana.charAt(0) + "").toUpperCase() + diaSemana.substring(1);
 
-				ObservableList<String> listaEstilosDiaSemanaLabel = semanaLabelListaArray[j].getStyleClass();
+				ObservableList<String> listaEstilosDiaSemanaLabel = diaSemanaLabelLista.get(j).getStyleClass();
 
 				if (listaEstilosDiaSemanaLabel.contains("sunday")) {
 					listaEstilosDiaSemanaLabel.remove("sunday");
@@ -169,7 +167,8 @@ public class CalendarItem extends GridPane implements Initializable {
 				if (ahora.getMonthValue() == monthproperty.get() && ahora.getYear() == year.get()
 						&& ahora.getDayOfMonth() == (j - diaPrimeroDesplazado + 1)) {
 					listaEstilosDiaLabel.add("today");
-					//System.out.println(ahora+ " - " + monthproperty.get()+ " - " + year.get() + " - " +(j - diaPrimeroDesplazado + 1) );
+					// System.out.println(ahora+ " - " + monthproperty.get()+ " - " + year.get() + "
+					// - " +(j - diaPrimeroDesplazado + 1) );
 				} else {
 					listaEstilosDiaLabel.remove("today");
 				}
@@ -285,16 +284,13 @@ public class CalendarItem extends GridPane implements Initializable {
 	public final ObjectProperty<Estilo> aparienciaProperty() {
 		return this.apariencia;
 	}
-	
 
 	public final Estilo getEstilocss() {
 		return this.aparienciaProperty().get();
 	}
-	
 
 	public final void setEstilocss(final Estilo estilocss) {
 		this.aparienciaProperty().set(estilocss);
 	}
-	
 
 }

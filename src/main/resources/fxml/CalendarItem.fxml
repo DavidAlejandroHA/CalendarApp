@@ -28,13 +28,13 @@
    </columnConstraints>
    <children>
       <Label fx:id="monthLabel" styleClass="month" text="Month Label" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-      <Label fx:id="lunesLabel" styleClass="weekday" text="L" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-      <Label fx:id="martesLabel" styleClass="weekday" text="M" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-      <Label fx:id="miercolesLabel" styleClass="weekday" text="X" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-      <Label fx:id="juevesLabel" styleClass="weekday" text="J" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-      <Label fx:id="viernesLabel" styleClass="weekday" text="V" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-      <Label fx:id="sabadoLabel" styleClass="weekday" text="S" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-      <Label fx:id="domingoLabel" styleClass="weekday" text="D" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+      <Label id="diaSemanaLabel" fx:id="lunesLabel" styleClass="weekday" text="L" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+      <Label id="diaSemanaLabel" fx:id="martesLabel" styleClass="weekday" text="M" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+      <Label id="diaSemanaLabel" fx:id="miercolesLabel" styleClass="weekday" text="X" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+      <Label id="diaSemanaLabel" fx:id="juevesLabel" styleClass="weekday" text="J" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+      <Label id="diaSemanaLabel" fx:id="viernesLabel" styleClass="weekday" text="V" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+      <Label id="diaSemanaLabel" fx:id="sabadoLabel" styleClass="weekday" text="S" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+      <Label id="diaSemanaLabel" fx:id="domingoLabel" styleClass="weekday" text="D" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
       <Label id="diaLabel" fx:id="diaLabel1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="day" text="Dia" GridPane.rowIndex="2" />
       <Label id="diaLabel" fx:id="diaLabel2" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="day" text="Dia" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <Label id="diaLabel" fx:id="diaLabel3" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="day" text="Dia" GridPane.columnIndex="2" GridPane.rowIndex="2" />

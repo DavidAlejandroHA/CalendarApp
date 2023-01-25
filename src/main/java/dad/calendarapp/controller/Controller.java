@@ -134,7 +134,6 @@ public class Controller implements Initializable {
 				if (event.getCode() == KeyCode.ENTER) {
 					boolean limiteExecido = false;
 					try {
-						// String numString = desplazamientoSpinner.getEditor().textProperty().get();
 						String stringNum = desplazamientoSpinner.getEditor().textProperty().get();
 						int num = stringNum == null ? 0 : Integer.parseInt(stringNum);
 						if (num < -9999 || num > 9999) {
@@ -241,7 +240,7 @@ public class Controller implements Initializable {
 			calendarios[i].aparienciaProperty().bind(Bindings.createObjectBinding(() -> {
 				return apariencia.getValue();
 			}, apariencia)); // en realidad no cambiará nada porque el cambio de
-							// estilo se gestiona desde el controller
+								// estilo se gestiona desde el controller
 		}
 
 		// ---- bindear el idioma seleccionado a la idioma property
