@@ -82,6 +82,11 @@ public class CalendarItem extends GridPane implements Initializable {
 
 		listaDiasLabels = view.getChildren().stream().filter(node -> node instanceof Label).map(node -> (Label) node)
 				.filter(label -> "diaLabel".equals(label.getId())).collect(Collectors.toList());
+		
+		diaSemanaLabelLista = view.getChildren().stream().filter(node -> node instanceof Label)
+				.map(node -> (Label) node).filter(label -> "diaSemanaLabel".equals(label.getId()))
+				.collect(Collectors.toList()); // 7 en total
+		// diaSemanaLabelLista.get(0).getStyleClass().get(1)
 
 		// view.getStylesheets().add(getClass().getResource("lightstyle.css").toExternalForm());
 
@@ -95,10 +100,7 @@ public class CalendarItem extends GridPane implements Initializable {
 		StringProperty[] stringPropsArray = { lunesTitulo, martesTitulo, miercolesTitulo, juevesTitulo, viernesTitulo,
 				sabadoTitulo, domingoTitulo };
 
-		diaSemanaLabelLista = view.getChildren().stream().filter(node -> node instanceof Label)
-				.map(node -> (Label) node).filter(label -> "diaSemanaLabel".equals(label.getId()))
-				.collect(Collectors.toList()); // 7 en total
-		// diaSemanaLabelLista.get(0).getStyleClass().get(1)
+		
 
 //		Label[] semanaLabelListaArray = { lunesLabel, martesLabel, miercolesLabel, juevesLabel, viernesLabel,
 //				sabadoLabel, domingoLabel };
